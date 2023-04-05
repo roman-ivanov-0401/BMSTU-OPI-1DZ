@@ -11,12 +11,49 @@ const int MATRIX_SIZE = 17;
 void GenerateMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 int GenerateRandomNumberInRange(int range);
 void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
+void RenderMenu(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 
 //TASKS
 void StartTaskA(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 int CountSumOfDigital(int number);
 void StartTaskB(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 void StartTaskC(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
+
+
+// MENU
+// Вывод меню в консоль и предоставление выбора
+// пункта меню пользователю
+void RenderMenu(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
+	int numberOfChosenPoint{};
+
+	do {
+		cout << "LABORATORY WORK #1" << endl;
+		cout << "[1] TASK #1" << endl;
+		cout << "[2] TASK #2" << endl;
+		cout << "[3] TASK #3" << endl;
+		cout << "[4] SHOW MATRIX" << endl;
+		cout << "[0] EXIT" << endl;
+		cout << "Enter number of option: ";
+		cin >> numberOfChosenPoint;
+
+		switch (numberOfChosenPoint) {
+		case 1:
+			StartTaskA(matrix);
+			break;
+		case 2:
+			StartTaskB(matrix);
+			break;
+		case 3:
+			StartTaskC(matrix);
+			break;
+		case 4:
+			ShowMatrix(matrix);
+			break;
+		}
+		system("pause");
+		system("cls");
+	} while (numberOfChosenPoint >= 1 && numberOfChosenPoint <= 4);
+}
 
 int main() {
 	srand(time(NULL));
@@ -26,7 +63,7 @@ int main() {
 	RenderMenu(matrix);
 }
 
-// Сгенерировать матрицу 17х17, состоящую из случайных чисел в 
+// Сгенерировать матрицу 17х17, состоящую из случайных чисел в
 // диапазоне [-12, 12]
 void GenerateMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
 	for (int i = 0; i < MATRIX_SIZE; i++) {
@@ -40,10 +77,7 @@ void GenerateMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
 // Сгенерировать случайное число в диапазоне [-12; 12]
 int GenerateRandomNumberInRange(int range) {
 	return rand() % (range + 1) * 2 - range;
-
-	if (!nullElementIsfound) cout << "Null element nto found" << endl;
 }
-
 
 // Вывод матрицы в консоль
 void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
@@ -133,3 +167,4 @@ void StartTaskC(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
 	}
 	if (!nullElementIsfound) cout << "Null element nto found" << endl;
 }
+
