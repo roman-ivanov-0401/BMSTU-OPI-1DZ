@@ -12,6 +12,8 @@ void GenerateMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 int GenerateRandomNumberInRange(int range);
 void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 
+void StartTaskC(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
+
 int main() {
 	srand(time(NULL));
 
@@ -48,4 +50,27 @@ void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
 		cout << endl;
 		cout << endl;
 	}
+}
+
+// Указать номер строки и столбца  первого нулевого элемента среди элементов матрицы,
+// выделенных чёрным цветом (матрица квадратная).
+void StartTaskC(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
+	ShowMatrix(matrix);
+	bool nullElementIsfound = false;
+	for (int i = 5; i < MATRIX_SIZE; i++)
+	{
+		for (int j = 0; j < MATRIX_SIZE; j++)
+		{
+			if (matrix[i][j] == 0)
+			{
+				cout << endl << "Number of stroke: " << i + 1 << endl
+					<< "Number of column: " << j + 1 << endl;
+				nullElementIsfound = true;
+				break;
+			}
+
+		}
+		if (nullElementIsfound) break;
+	}
+	if (!nullElementIsfound) cout << "Null element nto found" << endl;
 }
