@@ -12,6 +12,9 @@ void GenerateMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 int GenerateRandomNumberInRange(int range);
 void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 
+int CountSumOfDigital(int number);
+void StartTaskB(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
+
 int main() {
 	srand(time(NULL));
 
@@ -48,4 +51,38 @@ void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
 		cout << endl;
 		cout << endl;
 	}
+}
+
+// Подсчитать сумму цифр цисла number
+int CountSumOfDigital(int number) {
+	int count = 0;
+	while (number != 0) {
+		count += number % 10;
+		number /= 10;
+	}
+	return (int)fabs(count);
+}
+
+// Проверить, содержит строка, номер которой введен с клавиатуры,
+// знакочередующиеся элементы.
+void StartTaskB(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
+	ShowMatrix(matrix);
+	cout << "TASK B" << endl;
+	cout << "Enter number of the stroke(1 - " << MATRIX_SIZE << "): ";
+	int numberOfTheStroke{};
+	cin >> numberOfTheStroke;
+
+	bool signOfPrevious{};
+	bool signOfCurrent{};
+	bool flagOfCondition = true;
+	for (int i = 1; i < 17; i++) {
+		signOfPrevious = matrix[numberOfTheStroke - 1][i - 1] >= 0;
+		signOfCurrent = matrix[numberOfTheStroke - 1][i] >= 0;
+		if (signOfCurrent == signOfPrevious) {
+			cout << "FALSE" << endl;
+			flagOfCondition = false;
+			break;
+		}
+	}
+	if (flagOfCondition) cout << "TRUE" << endl;
 }
