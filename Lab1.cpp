@@ -10,7 +10,7 @@ const int MATRIX_SIZE = 17;
 // PREPARING
 void GenerateMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 int GenerateRandomNumberInRange(int range);
-
+void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 
 int main() {
 	srand(time(NULL));
@@ -36,4 +36,16 @@ int GenerateRandomNumberInRange(int range) {
 	return rand() % (range + 1) * 2 - range;
 
 	if (!nullElementIsfound) cout << "Null element nto found" << endl;
+}
+
+
+// Вывод матрицы в консоль
+void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
+	for (int i = 0; i < MATRIX_SIZE; i++) {
+		for (int j = 0; j < MATRIX_SIZE; j++) {
+			cout << setw(5) << matrix[i][j];
+		}
+		cout << endl;
+		cout << endl;
+	}
 }
