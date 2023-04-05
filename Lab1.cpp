@@ -12,6 +12,12 @@ void GenerateMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 int GenerateRandomNumberInRange(int range);
 void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 
+//TASKS
+void StartTaskA(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
+int CountSumOfDigital(int number);
+void StartTaskB(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
+void StartTaskC(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
+
 int main() {
 	srand(time(NULL));
 
@@ -48,4 +54,82 @@ void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
 		cout << endl;
 		cout << endl;
 	}
+}
+
+// К каждому элементу  целочисленной матрицы прибавить сумму  цифр элемента,
+// стоящего в этой же строке на побочной диагонали
+void StartTaskA(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
+	ShowMatrix(matrix);
+	int diagonalValue = 0;
+	int i = 0;
+	for (int j = MATRIX_SIZE - 1; j >= 0; j--)
+	{
+		diagonalValue = CountSumOfDigital(matrix[i][j]);
+		for (int k = 0; k < MATRIX_SIZE; k++)
+		{
+			matrix[i][k] += diagonalValue;
+		}
+		i++;
+
+	}
+	cout << endl;
+	cout << "Result: " << endl;
+	ShowMatrix(matrix);
+}
+
+// Подсчитать сумму цифр цисла number
+int CountSumOfDigital(int number) {
+	int count = 0;
+	while (number != 0) {
+		count += number % 10;
+		number /= 10;
+	}
+	return (int)fabs(count);
+}
+
+// Проверить, содержит строка, номер которой введен с клавиатуры,
+// знакочередующиеся элементы.
+void StartTaskB(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
+	ShowMatrix(matrix);
+	cout << "TASK B" << endl;
+	cout << "Enter number of the stroke(1 - " << MATRIX_SIZE << "): ";
+	int numberOfTheStroke{};
+	cin >> numberOfTheStroke;
+
+	bool signOfPrevious{};
+	bool signOfCurrent{};
+	bool flagOfCondition = true;
+	for (int i = 1; i < 17; i++) {
+		signOfPrevious = matrix[numberOfTheStroke - 1][i - 1] >= 0;
+		signOfCurrent = matrix[numberOfTheStroke - 1][i] >= 0;
+		if (signOfCurrent == signOfPrevious) {
+			cout << "FALSE" << endl;
+			flagOfCondition = false;
+			break;
+		}
+	}
+	if (flagOfCondition) cout << "TRUE" << endl;
+}
+
+// Указать номер строки и столбца  первого нулевого элемента среди элементов матрицы,
+// выделенных чёрным цветом (матрица квадратная).
+void StartTaskC(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
+	ShowMatrix(matrix);
+	bool nullElementIsfound = false;
+	for (int i = 5; i < MATRIX_SIZE; i++)
+	{
+		for (int j = 0; j < MATRIX_SIZE; j++)
+		{
+			if (matrix[i][j] == 0)
+			{
+				cout << endl << "Number of stroke: " << i + 1 << endl
+					<< "Number of column: " << j + 1 << endl;
+				nullElementIsfound = true;
+				break;
+			}
+
+		}
+		if (nullElementIsfound) break;
+	}
+	if (!nullElementIsfound) cout << "Null element nto found" << endl;
 }
