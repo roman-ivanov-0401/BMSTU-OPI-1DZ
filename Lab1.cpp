@@ -12,6 +12,9 @@ void GenerateMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 int GenerateRandomNumberInRange(int range);
 void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
 
+//TASKS
+void StartTaskA(int matrix[MATRIX_SIZE][MATRIX_SIZE]);
+
 int main() {
 	srand(time(NULL));
 
@@ -48,4 +51,25 @@ void ShowMatrix(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
 		cout << endl;
 		cout << endl;
 	}
+}
+
+// К каждому элементу  целочисленной матрицы прибавить сумму  цифр элемента,
+// стоящего в этой же строке на побочной диагонали
+void StartTaskA(int matrix[MATRIX_SIZE][MATRIX_SIZE]) {
+	ShowMatrix(matrix);
+	int diagonalValue = 0;
+	int i = 0;
+	for (int j = MATRIX_SIZE - 1; j >= 0; j--)
+	{
+		diagonalValue = CountSumOfDigital(matrix[i][j]);
+		for (int k = 0; k < MATRIX_SIZE; k++)
+		{
+			matrix[i][k] += diagonalValue;
+		}
+		i++;
+
+	}
+	cout << endl;
+	cout << "Result: " << endl;
+	ShowMatrix(matrix);
 }
